@@ -1,0 +1,6 @@
+<!-- 通用的搜索框  注意不是输入框，而是一个导航框 -->
+<view class="search_input">
+    <!-- open-type="navigate":表示不能跳转到tabBar界面 -->
+    <navigator url="/pages/search/index" open-type="navigate">搜索</navigator>
+</view>
+

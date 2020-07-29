@@ -1,10 +1,31 @@
-/**app.wxss**/
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+/* 引入styles文件夹中的样式资源 */
+@import "./styles/iconfont.wxss";
+
+/* 
+    初始化
+    在微信小程序中 不支持 通配符'*',所以要写标签选择器
+ */
+ page,view,text,swiper,swiper-item,image,navigator{
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
-} 
+}
+
+/* 
+定义主题颜色
+
+注意颜色 通过变量来实现
+1 less 中存在 变量 这个知识
+2 原生的css和wxss也是支持 变量的
+ */
+ page{
+  /* 定义主题颜色 */
+  --themeColor:#eb4450;
+  /* 
+  定义统一字体大小
+  假设设计稿大小是375px
+  1px = 2rpx
+  14px = 28rpx
+  */
+  font-size: 28rpx;
+}

@@ -1,0 +1,22 @@
+// 通用搜索框 用了less，由于安装了less插件，插件会自动把less代码转成.wxss代码
+.search_input{
+     height: 90rpx;  
+     padding: 10rpx;   
+     background-color: var(--themeColor);
+     
+     navigator{  
+        //让navigator组件占满class名为的view组件的高度
+         height: 100%;
+         //设置为伸缩盒子，伸缩盒子是？
+         display: flex;
+         //让里面的文字水平居中
+         justify-content: center;
+          //让里面的文字垂直居中
+         align-items: center; 
+         background-color : #fff; 
+         //设置边界为圆角矩形
+         border-radius: 15rpx; 
+         //设置字体颜色
+         color: #666;   
+     }
+}
