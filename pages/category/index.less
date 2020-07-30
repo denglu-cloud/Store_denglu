@@ -1,0 +1,60 @@
+page{
+    height: 100%;
+}
+.cates{
+    height: 100%;
+    .cates_container{
+        // less中使用calc的时候要注意，要用~' '
+        height: ~'calc( 100vh - 90rpx )';
+        display: flex;
+
+        .left_menu{
+            // 确定容器后子项高度也是100%
+            flex: 2;
+            
+            .menu_item{
+                //注意高度
+                height: 80rpx;
+                display: flex;
+                //水平居中
+                justify-content: center;
+                // 垂直居中
+                align-items: center;
+                font-size: 30rpx;
+            }
+        }
+        .right_content{ 
+            // 子项高度100% flex
+            flex: 5;
+            .goods_group{
+                .goods_title{ 
+                    height: 80rpx;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .delimiter{
+                        color: #ccc;
+                        padding: 0 10rpx;
+                    }
+
+                    .title{}
+                }
+                .goods_list{
+                    display: flex;
+                    //表示可以产生换行效果,注意
+                    flex-wrap: wrap;
+                    navigator{
+                        width: 33.33%;
+                        text-align: center;
+                        // 图片宽度一般由外层容器确定，这里的image标签在全局样式wxss中默认设置为100%
+                        image{ 
+                            width:50%
+                        } 
+                        .goods_name{ } 
+                    }
+                }
+            }
+        }
+    }
+}
