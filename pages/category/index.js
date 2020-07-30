@@ -1,6 +1,8 @@
 //引入 用来发送请求的 方法 一定要把路径补全
 //request表示导入函数返回的
-import { request } from "../../request/index.js";
+import { request } from "../../request/index.js"; 
+//引入⽀持es7的async语法
+import regeneratorRuntime from '../../lib/runtime/runtime';
 
 Page({
 
@@ -41,58 +43,81 @@ Page({
            * 2 没有旧的数据，直接发送新请求
            * 3 有旧的数据，同时旧的数据也没有过期，就使用本地储存中的旧数据即可
            */
-          // 1 获取本地存储中的数据（小程序中也是存在本地储存技术的）
-          const Cates = wx.getStorageSync("cates");
-          // 2 判断
-          if(!Cates){
-               // 不存在，发送请求获取数据,getCates就是下面的分类方法
-               this.getCates();
-          }else{
-               // 有旧的数据，定义一个过期时间，假设1分钟
-               if(Date.now() - Cates.time > 1000 * 10 * 6){   
-                    //过期,重新发送请求
-                    this.getCates(); 
+               // 1 获取本地存储中的数据（小程序中也是存在本地储存技术的）
+               const Cates = wx.getStorageSync("cates");
+               // 2 判断
+               if(!Cates){
+                    // 不存在，发送请求获取数据,getCates就是下面的分类方法
+                    this.getCates();
                }else{
-                    //获取旧的数据
-                    this.Cates = Cates.data;
+                    // 有旧的数据，定义一个过期时间，假设1分钟
+                    if(Date.now() - Cates.time > 1000 * 10 * 6){   
+                         //过期,重新发送请求
+                         this.getCates(); 
+                    }else{
+                         //获取旧的数据
+                         this.Cates = Cates.data;
 
-                    //构建左侧的菜单数据
-                    let leftMenuList = this.Cates.map(v => v.cat_name);
-                    //构建右侧的商品数据
-                    let rightContent = this.Cates[0].children;
-                    this.setData({
-                         leftMenuList,
-                         rightContent      
-                         
-                    })
+                         //构建左侧的菜单数据
+                         let leftMenuList = this.Cates.map(v => v.cat_name);
+                         //构建右侧的商品数据
+                         let rightContent = this.Cates[0].children;
+                         this.setData({
+                              leftMenuList,
+                              rightContent      
+                              
+                         })
+                    }
+               
                }
-              
-          }
+          },
+
+          //获取分类数据
+          // getCates(){
+          async getCates(){
+
+               // request({
+               //      // url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"
+               //      url: "/categories"
+               // })
+               // .then(res => { 
+               //      this.Cates = res.data.message;
+
+               //      // 把接口的数据存入到本地储存中
+               //      wx.setStorageSync("cates",{time:Date.now(),data:this.Cates});
+
+               //      //构建左侧的菜单数据
+               //      let leftMenuList = this.Cates.map(v => v.cat_name);
+               //      //构建右侧的商品数据
+               //      let rightContent = this.Cates[0].children;
+               //      this.setData({
+               //           leftMenuList,
+               //           rightContent      
+                         
+               //      })
+               // })
+          
+          /**
+           * 1 使用es7的async await来发送请求
+           * 这一句执行完成之前，下面的不会执行：const res=await request({url: "/categories"})
+           * 其实这里好像改成了同步了
+           */
+          const res=await request({url: "/categories"});
+          // this.Cates = res.data.message;
+          //简化上面的this.Cates，已经在request中拼接了
+          this.Cates = res;     
+          // 把接口的数据存入到本地储存中
+          wx.setStorageSync("cates",{time:Date.now(),data:this.Cates});
+          //构建左侧的菜单数据
+          let leftMenuList = this.Cates.map(v => v.cat_name);
+          //构建右侧的商品数据
+          let rightContent = this.Cates[0].children;
+          this.setData({
+               leftMenuList,
+               rightContent      
+          })     
      },
 
-     //获取分类数据
-     getCates(){
-          request({
-               // url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"
-               url: "/categories"
-          })
-          .then(res => { 
-               this.Cates = res.data.message;
-
-               // 把接口的数据存入到本地储存中
-               wx.setStorageSync("cates",{time:Date.now(),data:this.Cates});
-
-               //构建左侧的菜单数据
-               let leftMenuList = this.Cates.map(v => v.cat_name);
-               //构建右侧的商品数据
-               let rightContent = this.Cates[0].children;
-               this.setData({
-                    leftMenuList,
-                    rightContent      
-                    
-               })
-          })
-     },
 
      // 左侧菜单的点击事件
      handleItemTap(e){

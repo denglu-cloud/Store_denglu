@@ -39,7 +39,9 @@ Page({
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
       this.setData({ 
-        swiperList: result.data.message
+        // swiperList: result.data.message
+        //result.data.message已经在request那边提取公共部分合并了
+        swiperList: result
       }) 
     })
  },
@@ -54,7 +56,7 @@ Page({
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
       this.setData({ 
-        catesList: result.data.message
+        catesList: result
       }) 
     })
  },
@@ -67,7 +69,7 @@ Page({
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
       this.setData({ 
-        floorList: result.data.message
+        floorList: result
       }) 
     })
  },

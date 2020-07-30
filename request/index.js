@@ -9,9 +9,10 @@ export const request = (params)=>{
         //先接受参数,但是又什么用？ 
         ...params,
         //合并url,合并上面的公共部分
-        url:baseUrl + params.url,
+        url: baseUrl + params.url, 
         success:(result)=>{
-          resolve(result);
+          // resolve(result);
+          resolve(result.data.message);
         },
         fail:(err)=>{   
           reject(err);
