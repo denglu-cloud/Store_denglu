@@ -7,7 +7,8 @@ Page({
   data: {
     // 轮播图数组
     swiperList: [],
-    catesList: []
+    catesList: [],
+    floorList: []
   },
 
   // 页面开始加载 就会触发
@@ -26,6 +27,7 @@ Page({
   //下面是优化上面的代码
   this.getSwiperList();
   this.getCateList();
+  this.getFloorList();
   
  }, 
 
@@ -53,7 +55,20 @@ Page({
         catesList: result.data.message
       }) 
     })
- }
+ },
+
+ //获取楼层数据
+ getFloorList(){
+  request({
+    //url会被放到request/index.js中的...params
+    url : "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"})
+    //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
+    .then(result => {
+      this.setData({ 
+        floorList: result.data.message
+      }) 
+    })
+ },
   
 });
   
