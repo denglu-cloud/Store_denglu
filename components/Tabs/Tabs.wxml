@@ -1,0 +1,22 @@
+<!-- 商品列表 -->
+<view class="tabs">
+    <view class="tabs_title">
+        <!-- handleItemTap：绑定的监听事件在.js文件中实现 -->
+        <!-- wx:for="{{tabs}}" 的数据来自于父组件，在js中可以看出 -->
+        <view
+            wx:for="{{tabs}}" 
+            wx:key="id"
+            class="title_item {{item.isActive ? 'active' : ''}}" 
+            bindtap="handleItemTap"
+            data-index="{{index}}"
+            >
+            {{item.value}}
+        </view>
+    </view>
+
+    <!-- 注意插槽可以替换为任何组件 -->
+    <view class="tabs_content">
+        <slot> </slot>
+    </view>
+
+</view>

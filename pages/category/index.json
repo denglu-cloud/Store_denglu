@@ -2,5 +2,5 @@
   "usingComponents": {
     "SearchInput":"../../components/SearchInput/SearchInput"
   },
-  "navigationBarTitleText": "分类首页"
-}
+  "navigationBarTitleText": "分类首页"  
+}     
