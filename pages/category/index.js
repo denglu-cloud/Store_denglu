@@ -13,7 +13,9 @@ Page({
          //右侧的商品数据
          rightContent:[],
          //表点击的左侧的菜单
-          currentIndex: 0
+          currentIndex: 0,
+          // 右侧内容的滚动条距离顶部的距离,就是每次点击左侧菜单时，使右侧菜单跳到该菜单顶部
+          scrollTop: 0
 
      },
 
@@ -46,10 +48,10 @@ Page({
                // 不存在，发送请求获取数据,getCates就是下面的分类方法
                this.getCates();
           }else{
-               // 有旧的数据，定义一个过期时间，假设10s
-               if(Date.now() - Cates.time > 1000 * 10){  
+               // 有旧的数据，定义一个过期时间，假设1分钟
+               if(Date.now() - Cates.time > 1000 * 10 * 6){   
                     //过期,重新发送请求
-                    this.getCates();
+                    this.getCates(); 
                }else{
                     //获取旧的数据
                     this.Cates = Cates.data;
@@ -71,7 +73,8 @@ Page({
      //获取分类数据
      getCates(){
           request({
-               url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"
+               // url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"
+               url: "/categories"
           })
           .then(res => { 
                this.Cates = res.data.message;
@@ -103,9 +106,12 @@ Page({
            //更新右侧的商品数据
            let rightContent = this.Cates[index].children;
 
+         
           this.setData({
-               currentIndex:index,
-               rightContent
+               currentIndex: index,
+               rightContent,
+                //  重新设置，右侧内容的scroll-view标签距离顶部的距离
+               scrolTop:0
           })
 
          

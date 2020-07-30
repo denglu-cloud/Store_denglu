@@ -35,7 +35,7 @@ Page({
  getSwiperList(){
   request({
     //url会被放到request/index.js中的...params
-    url : "https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata"})
+    url : "/home/swiperdata"})
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
       this.setData({ 
@@ -48,7 +48,9 @@ Page({
  getCateList(){
   request({
     //url会被放到request/index.js中的...params
-    url : "https://api-hmugo-web.itheima.net/api/public/v1/home/catitems"})
+    // url : "https://api-hmugo-web.itheima.net/api/public/v1/home/catitems"})
+    //提取url的公共部分
+    url : "/home/catitems"})
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
       this.setData({ 
@@ -61,7 +63,7 @@ Page({
  getFloorList(){
   request({
     //url会被放到request/index.js中的...params
-    url : "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"})
+    url : "/home/floordata"})
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
       this.setData({ 
