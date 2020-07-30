@@ -6,7 +6,8 @@ import { request } from "../../request/index.js";
 Page({
   data: {
     // 轮播图数组
-    swiperList: []
+    swiperList: [],
+    catesList: []
   },
 
   // 页面开始加载 就会触发
@@ -22,18 +23,37 @@ Page({
   //   });  
   // }
 
-  
   //下面是优化上面的代码
+  this.getSwiperList();
+  this.getCateList();
+  
+ }, 
+
+ //获取轮播图数据
+ getSwiperList(){
   request({
     //url会被放到request/index.js中的...params
     url : "https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata"})
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
-      this.setData({
+      this.setData({ 
         swiperList: result.data.message
       }) 
     })
- }, 
+ },
+
+ //获取分类导航数据
+ getCateList(){
+  request({
+    //url会被放到request/index.js中的...params
+    url : "https://api-hmugo-web.itheima.net/api/public/v1/home/catitems"})
+    //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
+    .then(result => {
+      this.setData({ 
+        catesList: result.data.message
+      }) 
+    })
+ }
   
 });
   
