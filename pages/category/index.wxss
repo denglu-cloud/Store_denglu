@@ -18,6 +18,10 @@ page {
   align-items: center;
   font-size: 30rpx;
 }
+.cates .cates_container .left_menu .active {
+  color: var(--themeColor);
+  border-left: 5rpx solid currentColor;
+}
 .cates .cates_container .right_content {
   flex: 5;
 }

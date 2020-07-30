@@ -22,6 +22,12 @@ page{
                 align-items: center;
                 font-size: 30rpx;
             }
+
+            // 给当前点击的选项点亮
+            .active{
+                color: var(--themeColor);
+                border-left: 5rpx solid currentColor;
+            }
         }
         .right_content{ 
             // 子项高度100% flex
@@ -42,7 +48,7 @@ page{
                 }
                 .goods_list{
                     display: flex;
-                    //表示可以产生换行效果,注意
+                    //表示可以产生换行效果,注意 ？？？
                     flex-wrap: wrap;
                     navigator{
                         width: 33.33%;

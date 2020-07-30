@@ -6,12 +6,15 @@
         <!-- scroll-y表示可以上下滚动 --> 
         <scroll-view scroll-y class="left_menu">
             <!-- *this表示什么？ --> 
-            <view 
-             class="menu_item"
+            <!-- 判断选项是否是点击的当前选项：index===currentIndex?'active':'' -->
+            <view  
+             class="menu_item {{index===currentIndex?'active':''}}"
              wx:for="{{leftMenuList}}"
              wx:key="*this"
+             bindtap="handleItemTap"
+             data-index="{{index}}"
              >
-                {{item}}
+                {{item}}  
             </view>
         </scroll-view>
 
