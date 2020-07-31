@@ -4,6 +4,20 @@ import { request } from "../../request/index.js";
 //引入⽀持es7的async语法
 import regeneratorRuntime from '../../lib/runtime/runtime';
 
+/**
+ * 1 用户上滑页面，滚动条触底，开始加载下一页数据
+ *   1 找到滚动条的触底事件，微信小程序官方开发文档寻找
+ *   2 判断还有没有下一页数据
+ *        1 获取到总页数 只有总条数
+ *             总页数 = Math.ceil(总条数 / 页容量 pagesize)
+ *             总页数 = Math.ceil(23 / 10) = 3 ，向上取整
+ *        2 获取到当前的页面 pageNum
+ *        3 判断一下 当前的页码是否大于等于 总页数
+ *   3 假设没有下一页数据，弹出一个提示
+ *   4 假设还有下一页数据，来加载下一页数据
+ */
+
+
 // pages/goods_list/index.js
 Page({
 
@@ -43,6 +57,9 @@ Page({
           pagesize: 10
      },
 
+     // 总页数
+     totalPages: 1,
+
      /**
       * 生命周期函数--监听页面加载
       */
@@ -54,8 +71,15 @@ Page({
      // 获取商品列表数据
      async getGoodsList(){
           const res = await request({url:"/goods/search",data:this.QueryParams});
+          // 获取总条数
+          const total = res.total;
+          // 计算总页数
+          this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
+          // console.log(this.totalPages);
+
           this.setData({
-               goodsList: res.goods
+               // 拼接了数组
+               goodsList: [...this.data.goodsList,...res.goods]
           })
      },
 
@@ -71,6 +95,21 @@ Page({
           this.setData({
                tabs
           })
+     },
+
+     // 页面上滑，滚动条触底事件
+     onReachBottom(){
+          // 1 判断还有没有写一页数据
+          if(this.QueryParams.pagenum >= this.totalPages){
+               // 没有下一页数据
+               // console.log();
+               wx.showToast({title: '没有下一页数据'});
+          }else{
+               // 还有下一页数据
+               this.QueryParams.pagenum++;
+               // 再次获取商品列表数据
+               this.getGoodsList();
+          }
      }
 
 })
