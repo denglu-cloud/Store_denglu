@@ -1,3 +1,4 @@
+<!-- 轮播图 -->
 <view class="detail_swiper">
     <swiper
         autoplay
@@ -18,7 +19,7 @@
     </swiper>
 </view>
 
-
+<!-- 商品价格和商品描述 -->
 <view class="goods_price"> ￥{{goodsObj.goods_price}}</view>
 <view class="goods_name_row">
     <view class="goods_name">{{goodsObj.goods_name}}</view>
@@ -40,5 +41,35 @@
         <!-- 使用富文本渲染 -->
         <rich-text  nodes="{{goodsObj.goods_introduce}}"> </rich-text>
           
+    </view>
+</view>
+
+<!-- 底部导航栏 -->
+<view class="btm_tool">
+    <view class="tool_item">
+        <view class="iconfont icon-kefu1" ></view>
+        <view>客服</view>
+        <!-- 点击按钮跳转到客服 -->
+        <button open-type="contact"></button>
+    </view>
+
+    <view class="tool_item">
+        <view class="iconfont icon-iconfontzhizuobiaozhun023130" ></view>
+        <view>分享</view> 
+        <!-- 点击按钮跳转到客服 -->
+        <button open-type="share"></button>
+    </view> 
+    
+    <navigator open-type="switchTab" url="/pages/cart/index" class="tool_item">
+        <view class="iconfont icon-gouwuchezhengpin" ></view>
+        <view>购物车</view>
+    </navigator> 
+
+    <view class="tool_item btn_cart" bindtap="handleCartAdd">
+        加入购物车
+    </view>
+
+    <view class="tool_item btn_buy">
+        立即购买
     </view>
 </view>

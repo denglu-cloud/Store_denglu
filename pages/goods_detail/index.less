@@ -1,3 +1,8 @@
+page{
+    // 防止内容被底部导航栏遮住，撑起来的高度和底部导航栏一样
+    padding-bottom: 90rpx;
+}
+
 .detail_swiper{
     swiper{
         // 让高度和宽度一样：height: 70vm
@@ -37,6 +42,7 @@
     .goods_collect{
         flex: 1;
         display: flex;
+         // 改变主轴的方向，使可以上下分布
         flex-direction: column;
         justify-content: center;
     }
@@ -64,3 +70,60 @@
     .goods_info_content{ }
 }
 
+// 底部导航栏
+.btm_tool{
+    border-top: 1rpx solid #ccc;
+    // 固定定位
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    // 固定定位的都要自己决定宽
+    width: 100%;
+    height: 90rpx;
+    background-color: #fff;
+    display: flex;
+
+    .tool_item{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 24rpx;
+        position: relative;
+    }
+    button{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+
+    .btn_cart{
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffa550;
+        color: #fff;
+        font-size: 30rpx;
+        font-weight: 600;
+    }
+    .btn_buy{
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #eb4450;
+        color: #fff;
+        font-size: 30rpx;
+        font-weight: 600;
+    }
+
+    
+}
