@@ -3,9 +3,11 @@
 <Tabs tabs="{{tabs}}"  bindtabsItemChange="handleTabsItemChange">
     <block wx:if="{{tabs[0].isActive}}"> 
       <view class="first_tab">
+            <!-- 这里的url表示点击跳到goods_detail商品详情界面 -->
             <navigator class="goods_item"   
                 wx:for="{{goodsList}}"
                 wx:key="goods_id"  
+                url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
             >
                 <!-- 左侧图片容器 -->   
                 <view class="goods_img_wrap"> 

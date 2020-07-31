@@ -1,0 +1,44 @@
+<view class="detail_swiper">
+    <swiper
+        autoplay
+        circular
+        indicator-dots
+    >   
+         <!-- bindtap="handlePreviewImage":是预览图效果 -->
+        <swiper-item
+            wx:for="{{goodsObj.pics}}"
+            wx:key="pics_id" 
+            bindtap="handlePreviewImage"
+            data-url="{{item.pics_mid}}"
+        >
+            <image mode="widthFix" src="{{item.pics_mid}}" />
+              
+
+        </swiper-item>
+    </swiper>
+</view>
+
+
+<view class="goods_price"> ￥{{goodsObj.goods_price}}</view>
+<view class="goods_name_row">
+    <view class="goods_name">{{goodsObj.goods_name}}</view>
+    <view class="goods_collect">
+        <text class="iconfont icon-choucang"></text>
+        <view class="collect_text">收藏</view>
+    </view>
+</view>
+
+<view class="goods_info">
+    <view class="goods_info_title"> 图文详情 </view>
+    <view class="goods_info_content"> 
+        <!-- 
+            富文本 
+            标签字符串变成标签显示,下面的goods_introduce就是标签字符串
+        -->
+        <!-- 直接渲染 不可以 -->
+        <!-- {{goodsObj.goods_introduce}} -->
+        <!-- 使用富文本渲染 -->
+        <rich-text  nodes="{{goodsObj.goods_introduce}}"> </rich-text>
+          
+    </view>
+</view>

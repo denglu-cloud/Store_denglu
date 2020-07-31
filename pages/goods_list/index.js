@@ -4,8 +4,6 @@ import { request } from "../../request/index.js";
 //引入⽀持es7的async语法
 import regeneratorRuntime from '../../lib/runtime/runtime';
 
-
-
 /**
  * 1 用户上滑页面，滚动条触底，开始加载下一页数据
  *   1 找到滚动条的触底事件，微信小程序官方开发文档寻找
@@ -88,7 +86,7 @@ Page({
           // console.log(this.totalPages);
 
           this.setData({
-               // 拼接了数组
+               // 拼接了数组,拼接、三小点表示解构？？？
                goodsList: [...this.data.goodsList,...res.goods]
           })
 

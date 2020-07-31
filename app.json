@@ -1,6 +1,6 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/index/index", 
     "pages/category/index",
     "pages/list/index",
     "pages/detail/index",   
@@ -9,18 +9,19 @@
     "pages/order/index", 
     "pages/search/index",
     "pages/user/index", 
-    "pages/feedback/index",
+    "pages/feedback/index", 
     "pages/login/index",
-    "pages/auth/index",
-    "pages/pay/index",
-    "pages/goods_list/index"
+    "pages/auth/index", 
+    "pages/pay/index", 
+    "pages/goods_list/index", 
+    "pages/goods_detail/index"       
   ],
-  "window":{  
+  "window":{    
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#eb4450",
+    "navigationBarBackgroundColor": "#eb4450", 
     "navigationBarTitleText": "邓路优选",
-    "navigationBarTextStyle":"white"
-  },
+    "navigationBarTextStyle":"white" 
+  }, 
   "style": "v2",
   "sitemapLocation": "sitemap.json",
 
