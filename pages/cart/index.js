@@ -9,6 +9,10 @@
  *        3 假设用户点击获取收货地址的提示框，取消
  *          scope值为false
  *        4 把获取到的收货地址 存入到 本地存储中
+ * 2 页面加载完毕
+ *   0 onLoad onShow
+ *   1 获取本地存储中的地址数据
+ *   2 把数据设置给data中的一个变量
  */
 
 //引入 用来发送请求的 方法 一定要把路径补全
@@ -18,6 +22,21 @@ import { getSetting,chooseAddress,openSetting } from "../../utils/asyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 
 Page({
+
+     data:{
+          address:{}
+     },
+
+     // 相对onload，常用的动作就用onShow
+     onShow(){
+          // 1 获取缓存中的收货地址信息
+          const address = wx.getStorageSync("address");
+          // 2 给data赋值
+          this.setData({
+               address
+          })
+          
+     },
      // // 点击收货地址
      // handleChooseAddress(){ 
      //      // 1 获取授权页面设置 
@@ -30,7 +49,7 @@ Page({
      //                     wx.chooseAddress({
      //                          success: (result1) => {
      //                               console.log(result1);
-     //                          },
+     //                          }, 
      //                     });
      //                }else{
      //                     // 3 用户以前拒绝过授予权限，先诱导用户打开授权页面设置
@@ -65,9 +84,11 @@ Page({
                     await openSetting();
                }
                // 4 调用获取收货地址的 api
-               const address = await chooseAddress();
+               let address = await chooseAddress();
+               // address.all的all这个属性怎么来的？
+               address.all = address.provinceName+address.cityName+address.countyName+address.detailInfo;
                // 5 存入到缓存中
-               wx.serStorageSync("adress",adress);
+               wx.setStorageSync("address",address);
           } catch (error) {
                console.log(error);
           }
