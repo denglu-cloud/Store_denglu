@@ -13,6 +13,29 @@
  *   0 onLoad onShow
  *   1 获取本地存储中的地址数据
  *   2 把数据设置给data中的一个变量
+ * 3 onShow
+ *   0 回到了商品详情页面，第一次添加商品的时候，手动新添加了新的属性
+ *        1 num=1;
+ *        2 checked=true;
+ *   1 获取缓存中的购物车数组
+ *   2 把购物车数据 填充到data中
+ * 4 全选的实现 数据的展示
+ *   1 onShow 获取缓存中的购物车数组
+ *   2 根据购物车中的商品数据，所有的商品都被选中，checked=true,全选就被选中
+ * 5 总价格和总数量
+ *   1 都需要商品被选中，我们才拿它来计算
+ *   2 获取购物车数组
+ *   3 遍历
+ *   4 判断商品是否被选中
+ *   5 总价格 += 商品的单价 * 商品的数量‘
+ *   5 总数量 += 商品的数量
+ *   6 把计算后的价格和数量，设置会data中即可
+ * 6 商品的选中
+ *   1 绑定change事件
+ *   2 获取到别修改的商品对象
+ *   3 商品对象的选中状态，取反
+ *   4 重新填充回data中和缓存中
+ *   5 重新计算全选，总价格，总数量
  */
 
 //引入 用来发送请求的 方法 一定要把路径补全
@@ -24,19 +47,55 @@ import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
 
      data:{
-          address:{}
+          address:{},
+          cart: [],
+          allChecked:false,
+          totalPrice: 0,
+          totalNum: 0
      },
 
      // 相对onload，常用的动作就用onShow
      onShow(){
           // 1 获取缓存中的收货地址信息
           const address = wx.getStorageSync("address");
-          // 2 给data赋值
-          this.setData({
-               address
-          })
+          // 1 获取缓存中的购物车数据,这个cart数据从哪来的？？？ 在商品详情goods_detail点击购物车时加入了缓存
+          // wx.getStorageSync("cart") || []：表示若wx.getStorageSync("cart")为空就等于[]
+          const cart = wx.getStorageSync("cart") || [];
+
+          // // 1 计算全选
+          // // every数组方法，会遍历，会接受一个回调函数，那么每一个回调函数都会返回true,那么every方法的返回值为true
+          // // 只要有一个回调函数返回了false,那么不再循环执行，直接返回false
+          // // 空数组，注意，调用every，返回值就是true
+          // let allChecked = true;
+          // // 1 总价格、总数量
+          // let totalPrice = 0;
+          // let totalNum = 0;
+          // cart.forEach(v => {
+          //      if(v.checked){
+          //           totalPrice += v.num * v.goods_price;
+          //           totalNum += v.num;
+          //      }else{
+          //           allChecked = false;
+          //      }
+          // })
+          // // 判断数组是否为空
+          // allChecked = cart.length != 0 ? allChecked : false;
+          // // 2 给data赋值
+          // this.setData({
+          //      address,
+          //      cart,
+          //      allChecked,
+          //      totalPrice,
+          //      totalNum
+          // })
+
+          // 版本3
+          this.setData({address});
+          this.setCart(cart);
           
      },
+
+     // 版本1
      // // 点击收货地址
      // handleChooseAddress(){ 
      //      // 1 获取授权页面设置 
@@ -71,7 +130,7 @@ Page({
      //      });
      // }
 
-     // 改进上面的代码
+     // 改进上面的代码1 版本2
      // 点击收货地址
      async handleChooseAddress(){
           try {
@@ -92,6 +151,49 @@ Page({
           } catch (error) {
                console.log(error);
           }
+     },
+
+     // 商品的选中
+     handleItemChange(e){
+          // 1 获取被修改的商品的id  
+          // wxml中传过来的数据是保存在哪里的？（wxml那边写的代码:<checkbox-group data-id="{{item.goods_id}}" bindchange="handleItemChange">）
+          const goods_id = e.currentTarget.dataset.id;
+          // 2 获取购物车数组，下面的data又是指什么？指js文件中的data{ }?
+          let {cart} = this.data;
+          // 3 找到被修改的商品对象
+          let index = cart.findIndex(v => v.goods_id === goods_id);
+          // 4 选中状态取反
+          cart[index].checked = !cart[index].checked;
+
+          this.setCart(cart);
+
+     },
+
+     // 版本3
+     // 设置购物车状态同时，重新计算，底部工具栏的数据，全选，总价格，购买的数量
+     // 里面又调用setData
+     setCart(cart){
+          let allChecked = true;
+          // 总价格，总数量
+          let totalPrice = 0;
+          let totalNum = 0;
+          cart.forEach(v => {
+               if(v.checked){
+                    totalPrice += v.num * v.goods_price;
+                    totalNum += v.num;
+               }else{
+                    allChecked = false
+               }
+          })
+          // 判断数组是否为空
+          allChecked = cart.length != 0 ? allChecked : false;
+          this.setData({
+               cart,
+               totalPrice,
+               totalNum,
+               allChecked
+          });
+          wx.setStorageSync("cart",cart);
      }
 
 })
