@@ -93,6 +93,8 @@ Page({
           if(index === -1){
                // 不存在，第一次添加
                this.GoodsInfo.num = 1;
+               //添加新的变量，是否选中，方便购物车页面的复选框使用
+               this.GoodsInfo.checked=true;
                cart.push(this.GoodsInfo);
           }else{
                // 4 已经存在购物车数据，执行num++

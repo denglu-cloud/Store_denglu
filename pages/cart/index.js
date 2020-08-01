@@ -36,6 +36,12 @@
  *   3 商品对象的选中状态，取反
  *   4 重新填充回data中和缓存中
  *   5 重新计算全选，总价格，总数量
+ * 7 全选和反选
+ *   1 全选复选框绑定事件 change
+ *   2 获取data中的全选变量 allChecked
+ *   3 直接取反 allChecked = !allChecked
+ *   4 遍历购物车数组，让里面商品选中状态跟随，allChecked,改变而改变
+ *   5 把购物车数组 和 allChecked,重新设置会data，把购物车重新设置会缓存中
  */
 
 //引入 用来发送请求的 方法 一定要把路径补全
@@ -156,7 +162,8 @@ Page({
      // 商品的选中
      handleItemChange(e){
           // 1 获取被修改的商品的id  
-          // wxml中传过来的数据是保存在哪里的？（wxml那边写的代码:<checkbox-group data-id="{{item.goods_id}}" bindchange="handleItemChange">）
+          // wxml中传过来的数据是保存在哪里的？
+          // （wxml那边写的代码:<checkbox-group data-id="{{item.goods_id}}" bindchange="handleItemChange">）
           const goods_id = e.currentTarget.dataset.id;
           // 2 获取购物车数组，下面的data又是指什么？指js文件中的data{ }?
           let {cart} = this.data;
@@ -166,7 +173,6 @@ Page({
           cart[index].checked = !cart[index].checked;
 
           this.setCart(cart);
-
      },
 
      // 版本3
@@ -194,6 +200,18 @@ Page({
                allChecked
           });
           wx.setStorageSync("cart",cart);
+     },
+
+     // 商品全选功能
+     handleItemAllChecked(){
+          // 1 获取data中的数据
+          let {cart,allChecked} = this.data;
+          // 2 修改值
+          allChecked = !allChecked;
+          // 3 循环修改cart数组中的商品选中状态
+          cart.forEach(v => v.checked = allChecked);
+          // 4 把修改后的值，填充回data或者缓存中
+          this.setCart(cart);
      }
 
 })
