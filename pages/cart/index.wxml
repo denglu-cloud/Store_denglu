@@ -23,7 +23,9 @@
 <view class="cart_content">
     <view class="cart_title">购物车 </view>
     <view class="cart_main">
-        <view class="cart_item"
+        <!-- 当cart数组长度不为0时（就是购物车不为空），显示商品信息， -->
+       <block wx:if="{{cart.length !== 0}}">
+            <view class="cart_item"
             wx:for="{{cart}}"
             wx:key="goods_id"
         >
@@ -58,6 +60,11 @@
 
             </view>
         </view>
+       </block>
+       <block wx:else>
+           <image mode="widthFix" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3074431641,2413950145&fm=26&gp=0.jpg"  />
+             
+       </block>
     </view>
 </view>
 
