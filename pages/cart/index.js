@@ -57,8 +57,8 @@
  */
 
 //引入 用来发送请求的 方法 一定要把路径补全
-//request表示导入函数返回的
-import { getSetting,chooseAddress,openSetting } from "../../utils/asyncWx.js"; 
+//引入自定义的promise函数，request表示导入函数返回
+import { getSetting,chooseAddress,openSetting,showModal } from "../../utils/asyncWx.js"; 
 //引入⽀持es7的async语法
 import regeneratorRuntime from '../../lib/runtime/runtime';
 
@@ -227,32 +227,40 @@ Page({
      },
 
      // 商品数量的编辑功能
-     handleItemNumEdit(e){
+     async handleItemNumEdit(e){
           // 1 获取传递过来的参数
           const {operation,id} = e.currentTarget.dataset;
           // 2 获取购物车数组
           let {cart} = this.data;
           // 3 找到需要修改的商品的索引
           const index = cart.findIndex(v => v.goods_id === id);
-          // 4-0 判断是否要执行删除
+          // 4 判断是否要执行删除
           if(cart[index].num === 1 && operation === -1){
-               // 弹窗提示
-               wx.showModal({
-                    title: '提示',
-                    content: '你是否要删除',
-                    success: (result) => {
-                         if (result.confirm) {
-                              // 删除一个
-                              cart.splice(index,1);
-                              this.setCart(cart);
-                         }else if(result.cancel){
-                              console.log('用户点击取消')
+               // 4-0 弹窗提示
+               const result = await showModal({content:"您是否要删除？"})
+               if (result.confirm) {
+                    // 删除一个
+                    cart.splice(index,1);
+                    this.setCart(cart);
+               }
 
-                         }
-                    },
-               });
+
+               // // 4-0 弹窗提示
+               // wx.showModal({
+               //      title: '提示',
+               //      content: '你是否要删除',
+               //      success: (result) => {
+               //           if (result.confirm) {
+               //                // 删除一个
+               //                cart.splice(index,1);
+               //                this.setCart(cart);
+               //           }else if(result.cancel){
+               //                console.log('用户点击取消')
+
+               //           }
+               //      },
+               // });
                  
-
           }else{
                // 4-1 进行修改数量
           cart[index].num += operation;
