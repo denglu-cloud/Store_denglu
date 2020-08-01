@@ -1,1 +1,5 @@
-/* pages/auth/index.wxss */
+button{
+    /* 宽度没效果的？ */
+    width: 80%;
+    margin-top: 40rpx;
+}    

@@ -3,6 +3,16 @@ let ajaxTimes = 0;
 
 //这是es6的promise函数  以后要专门学习一下
 export const request = (params)=>{
+     // 判断url中是否带有 /my/ 请求的是私有的路径，要带上header token
+    //  {...params.header}:表示合并？
+     let header = {...params.header};
+     if(params.url.includes("/my/")){
+          // head["Authorization"]:这是什么语法？
+          // 拼接header,带上token
+          header["Authorization"] = wx.getStorageSync("token");
+     }
+
+
     // 将请求次数+1
     ajaxTimes++;
     
@@ -21,6 +31,7 @@ export const request = (params)=>{
       wx.request({
         //先接受参数,但是又什么用？ 
         ...params,
+        header:header,
         //合并url,合并上面的公共部分
         url: baseUrl + params.url, 
         success:(result)=>{
