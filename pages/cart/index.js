@@ -54,11 +54,15 @@
  *        2 取消，什么都不做
  *   4-1 直接修改商品对象的数量 num
  *   5 把cart数组 重新设置回缓存中，和data中this.setCart
+ * 9 点击结算
+ *   1 判断有没有守收货地址
+ *   2 判断用户有没有选购商品
+ *   3 经过以上的验证，跳转到，支付页面
  */
 
 //引入 用来发送请求的 方法 一定要把路径补全
 //引入自定义的promise函数，request表示导入函数返回
-import { getSetting,chooseAddress,openSetting,showModal } from "../../utils/asyncWx.js"; 
+import { getSetting,chooseAddress,openSetting,showModal,showToast } from "../../utils/asyncWx.js"; 
 //引入⽀持es7的async语法
 import regeneratorRuntime from '../../lib/runtime/runtime';
 
@@ -267,5 +271,24 @@ Page({
           // 5 设置会缓存和data中
           this.setCart(cart);
           }
+     },
+
+     // 点击结算
+     async handlePay(){
+          // 1 判断收货地址
+          const {address,totalNum} = this.data;
+          if(!address.userName){
+               await showToast({title:"你还没有选择收货地址"});
+               return;
+          }
+          // 2 判断用户有没有选购商品
+          if(totalNum === 0){
+               await showToast({title:"你还没有选购商品"});
+               return;
+          }
+          // 3 跳转到支付界面
+          wx.navigateTo({
+               url: '/pages/pay/index'
+          });
      }
 })

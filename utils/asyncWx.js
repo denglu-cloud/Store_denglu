@@ -71,3 +71,21 @@ export const showModal=({content}) => {
        });
     })
 }
+
+
+// promise形式 showToast
+export const showToast=({title}) => {
+    return new Promise((resolve,reject) => {
+        wx.showToast({
+            title: title,
+            // 提示内容content可在外面自定义
+            icon: 'none',
+            success: (result) => {
+                resolve(result);
+            },
+            fail:(err) => {
+                reject(err);
+            }
+       });
+    })
+}

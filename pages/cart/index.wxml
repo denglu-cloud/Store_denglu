@@ -87,7 +87,7 @@
     </view>
 
     <!-- 结算 -->
-    <view class="order_pay_wrap">
+    <view class="order_pay_wrap" bindtap="handlePay">
         结算({{totalNum}})
     </view>
 </view>
