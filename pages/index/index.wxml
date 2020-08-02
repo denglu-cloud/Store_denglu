@@ -2,10 +2,10 @@
   <!-- 搜索框 开始 -->
   <!-- 这是引入的自定义组件 -->
   <SearchInput></SearchInput>     
-  <!-- 搜索框 结束  -->            
-  
-  <!-- 轮播图 开始 -->              
-  <view class="index_swiper">                  
+  <!-- 搜索框 结束  -->                
+     
+  <!-- 轮播图 开始 -->                
+  <view class="index_swiper">                     
     <!-- 
       1 swiper标签存在默认的宽度和高度     
         100% * 150px   

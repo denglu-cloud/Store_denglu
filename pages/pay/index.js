@@ -78,7 +78,7 @@ Page({
                     // 1 判断缓存中有没有token
                // const token = wx.getStorageSync("token");
                // 在这里写假冒的token是可以的，注意这是假的！！！
-               const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIzLCJpYXQiOjE1NjQ3MzAwNzksImV4cCI6MTAwMTU2NDczMDA3OH0.YPt-XeLnjV-_1ITaXGY2FhxmCe4NvXuRnRB8OMCfnPo"
+               const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIzLCJpYXQiOjE1NjQ3MzAwNzksImV4cCI6MTAwMTU2NDczMDA3OH0.YPt-XeLnjV-_1ITaXGY2FhxmCe4NvXuRnRB8OMCfnPo";
                
                
                // 2 判断
@@ -136,14 +136,14 @@ Page({
                // 注意，这里主要是为了测试，所以支付失败也会跳转到成功页面！！！！！
                //=============================================================================
                // 8 手动删除缓存中 已经支付了的商品，注意这里是先拿还没有过滤掉的cart购物车数据
-               let newCart=wx.getStorageSync("cart");
-               //过滤，留下来未被选中的
-               newCart=newCart.filter(v=>!v.checked);
-               wx.setStorageSync("cart", newCart);
-                // 8 支付成功了 跳转到订单页面
-                wx.navigateTo({
-                    url: '/pages/order/index'
-               });
+               // let newCart=wx.getStorageSync("cart");
+               // //过滤，留下来未被选中的
+               // newCart=newCart.filter(v=>!v.checked);
+               // wx.setStorageSync("cart", newCart);
+               //  // 8 支付成功了 跳转到订单页面
+               //  wx.navigateTo({
+               //      url: '/pages/order/index'
+               // });
                //=============================================================================
           }
 
