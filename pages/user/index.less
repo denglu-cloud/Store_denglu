@@ -1,0 +1,139 @@
+page{
+   background-color: #edece8; 
+}
+.user_info_wrap{
+    height: 45vh;
+    overflow: hidden;
+    background-color: var(--themeColor);
+    position: relative;
+    .user_img_wrap {
+        position: relative;
+        .user_bg {
+            height: 50vh;
+            // 高斯模糊
+            filter: blur(10rpx);
+        }
+
+        .user_info{
+            position: absolute;
+            // 下面这两个实现水平居中？left、transform
+            left: 50%;
+            transform: translateX(-50%);
+            // 向上面的组件延伸，可以营造立体的层叠效果
+            top: 20%;
+            text-align: center;
+            .user_icon{
+                width: 150rpx;
+                height: 150rpx;
+                // 圆角
+                border-radius: 50%;
+            }
+ 
+            .user_name{ 
+                color: #fff;
+                margin-top: 40rpx;
+                // font-size: 40rpx;
+            }
+        }
+    }
+
+    .user-btn{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 40%;
+        border: 1rpx solid greenyellow;
+        color: greenyellow;
+        text-align: center;
+        font-size: 38rpx;
+        padding: 30rpx;
+        border-radius: 10rpx;
+    }
+
+}
+
+
+// 历史足迹的
+.user_content{
+    position: relative;
+    .user_main{
+        padding-bottom: 100rpx;
+        // color可以设置user_main组件下级组件中的字体颜色全为#666，为啥，不是应该用单独的font-colcor才可以的吗?
+        color: #666;
+        position: absolute;
+        width: 90%;
+        left: 50%;
+        //transform: translateX(: 把元素沿着横向（x轴）移动自身宽度的50%，一般是从左侧为开始点也就是0点。而数值是-50%，所以是从左侧0点向左移动自身宽度的50%。
+        transform: translateX(-50%);
+        top: -40rpx;
+
+        // 我的足迹
+        .history_wrap{
+            background-color: #fff;
+            display: flex;
+            navigator{
+                flex: 1;
+                text-align: center;
+                padding: 10rpx 0;
+                .his_num{
+                    color: var(--themeColor);
+                }
+                .his_name{
+
+                }
+            }
+        }
+
+        // 历史订单
+        .orders_wrap{
+            background-color: #fff;
+            margin-top: 30rpx;
+            .orders_title{
+                padding: 20rpx;
+                border-bottom: 1rpx solid #ccc;
+            }
+            .order_content{
+                display: flex;
+                navigator{
+                    padding: 15rpx 0;
+                    flex: 1;
+                    text-align: center;
+                    .iconfont{
+                        color: var(--themeColor);
+                        font-size: 40rpx;
+                     }
+                    .order_name{ }
+                }
+            }
+        }
+        
+        // 应用信息
+        .address_wrap{
+            margin-top: 30rpx;
+            background-color: #fff;
+            padding: 20rpx;
+        }
+        .app_info_wrap{
+            margin-top: 30rpx;
+            background-color: #fff;
+            .app_info_item{
+                padding: 20rpx;
+                border-bottom: 1rpx solid #ccc;
+            }
+            .app_info_contact{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        .recommend_wrap{
+            margin-top: 30rpx;
+            background-color: #fff;
+            padding: 20rpx
+        }
+    }
+}
+
+
+
+
+
