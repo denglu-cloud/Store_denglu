@@ -35,8 +35,7 @@
       <navigator wx:for="{{catesList}}" wx:key="name">
           <image mode="widthFix" src="{{item.image_src}}"> </image>
       </navigator>
-  </view>
-  <!--分类导航 结束-->
+  </view> 
 
 
 <!-- 楼层 开始 -->

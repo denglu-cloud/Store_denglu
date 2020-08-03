@@ -11,13 +11,15 @@
         </view>
 
         <view class="fb_content">
-            <textarea placeholder="请描述一下您的问题"></textarea>
+            <textarea value="{{textVal}}" bindinput="handleTextInput" placeholder="请描述一下您的问题"></textarea>
             <view class="tb_tool">
                 <button bindtap="handleChooseImg">+</button>
                 <!-- 注意，简单的数组拼接在微信小程序中key要写*this -->
                 <view class="up_img_item"
                     wx:for="{{chooseImgs}}"
                     wx:key="*this"
+                    bindtap="handleRemoveImg"
+                    data-index="{{index}}"
                 >
                      <UpImg src="{{item}}"></UpImg> 
                 </view>
@@ -26,7 +28,7 @@
 
         <view class="form_btn_wrap">
             
-            <button type="warn" color="white">
+            <button bindtap="handleFormSubmit" type="warn" color="white">
                
                 <icon type="success_no_circle" size="23" color="white">
                 </icon>
