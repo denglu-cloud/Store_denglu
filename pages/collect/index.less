@@ -1,0 +1,66 @@
+page{
+
+}
+
+.collect_main{
+    background-color: #f3f4f6;
+    .collect_title{
+        padding: 40rpx 0;
+        .collect_tips{
+            padding: 15rpx;
+            border-bottom: 1px solid #ccc;
+            margin-left: 25rpx;
+            background-color: #fff;
+        }
+
+    }
+
+    .active{
+        color: var(--themeColor);
+        border-color: currentColor;
+    }
+
+    .collect_content{
+        .goods_item{
+            // margin: 50rpx 0;
+            display: flex;
+            border-bottom: 5px solid #ccc;
+            background-color: #fff;
+            .goods_img_wrap{
+                flex: 2;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                image{
+                    width: 70%; 
+                }
+            }
+            .goods_info_wrap{
+                flex: 3;
+                display: flex;
+                //下面这两个是设置商品信息的，但是什么意思？
+                flex-direction: column;
+                // 空白环绕？space-around
+                justify-content: space-around;
+                .goods_name{
+                    /*
+                        使商品文字悬可以省略等效果，下面四行全是，但？？？
+    
+                        这一段都是用旧的flexbox写法啊，display:box和box-orient: vertical，
+                        -webkit-是支持浏览器前缀，而-webkit-line-clamp是这些绑在一起用的,
+                        -webkit-line-clamp用来限制在一个块元素显示的文本的行数。
+                    */
+                    display: -webkit-box;
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
+                    //下面就是第几行开始省略
+                    -webkit-line-clamp: 2;
+                }
+                .goods_price{
+                    color: var(--themeColor);
+                    font-size: 32rpx;
+                }
+            }
+        }
+    }
+}

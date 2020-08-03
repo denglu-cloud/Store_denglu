@@ -5,6 +5,7 @@ Page({
       * 页面的初始数据
       */
      data: {
+           collect: [],
 
            // 列表顶部
            tabs:[
@@ -32,59 +33,26 @@ Page({
 
      },
 
-     /**
-      * 生命周期函数--监听页面加载
-      */
-     onLoad: function (options) {
-
+     onShow(){
+          const collect = wx.getStorageSync("collect") || [];
+          this.setData({
+               collect
+          });
+            
      },
 
-     /**
-      * 生命周期函数--监听页面初次渲染完成
-      */
-     onReady: function () {
-
+     // 点击标题事件，从子组件传递过来（在子组件那边定义，这里实现具体的）
+     handleTabsItemChange(e){
+          // 1 获取被点击的标题索引
+          const {index} = e.detail;
+           // 2 修改源数组
+           let {tabs} = this.data;
+           // 判断使标题菜单点亮与否 (v,i)表示什么？v是循环项，i是索引，注意
+           tabs.forEach((v,i) => i === index ? v.isActive = true : v.isActive = false);
+           // 3 赋值到data
+           this.setData({
+                tabs
+           })
      },
 
-     /**
-      * 生命周期函数--监听页面显示
-      */
-     onShow: function () {
-
-     },
-
-     /**
-      * 生命周期函数--监听页面隐藏
-      */
-     onHide: function () {
-
-     },
-
-     /**
-      * 生命周期函数--监听页面卸载
-      */
-     onUnload: function () {
-
-     },
-
-     /**
-      * 页面相关事件处理函数--监听用户下拉动作
-      */
-     onPullDownRefresh: function () {
-
-     },
-
-     /**
-      * 页面上拉触底事件的处理函数
-      */
-     onReachBottom: function () {
-
-     },
-
-     /**
-      * 用户点击右上角分享
-      */
-     onShareAppMessage: function () {
-
-     }
 })

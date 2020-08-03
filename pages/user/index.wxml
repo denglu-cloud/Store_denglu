@@ -72,7 +72,7 @@
                 <text>联系客服 </text>
                 <text>19861408356</text>
             </view>
-            <view class="app_info_item">意见反馈</view>
+            <navigator class="app_info_item" url="/pages/feedback/index">意见反馈</navigator>
             <view class="app_info_item">关于我们</view>
         </view>
 

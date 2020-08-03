@@ -1,2 +1,31 @@
-<!--pages/collect/index.wxml-->
-<text>pages/collect/index.wxml</text>
+<!-- 绑定点击事件，handleTabsItemChange名称：为handle+子类的监听方法名称 -->
+<Tabs tabs="{{tabs}}"  bindtabsItemChange="handleTabsItemChange"> </Tabs>   
+
+<view class="collect_main">
+    <view class="collect_title"> 
+        <text class="collect_tips acitve">全部</text>
+        <text class="collect_tips">正在热卖</text>
+        <text class="collect_tips">即将上线</text>
+    </view>
+
+    <view class="collect_content">
+        <!-- 这里的url表示点击跳到goods_detail商品详情界面 -->
+            <navigator class="goods_item"   
+                wx:for="{{collect}}"
+                wx:key="goods_id"  
+                url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
+            >
+                <!-- 左侧图片容器 -->   
+                <view class="goods_img_wrap"> 
+                    <!-- 没有照片就显示这张占位符照片：http://image3.suning.cn/uimg/b2c/newcatentries/0070082592-000000000602606780_2_400x400.jpg   --> 
+                    <image mode="widthFix" src="{{item.goods_small_logo ? item.goods_small_logo :'http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg'}} "></image> 
+                </view>
+                <!-- 右侧商品容器 --> 
+                <view class="goods_info_wrap">
+                    <!-- item是系统的自带方法？ -->
+                    <view class="goods_name"> {{item.goods_name}} </view>
+                    <view class="goods_price"> ￥{{item.goods_price}} </view>
+                </view>
+            </navigator>
+    </view>
+</view>
