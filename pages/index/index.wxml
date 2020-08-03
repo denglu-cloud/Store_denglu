@@ -17,8 +17,8 @@
         3 让swiper标签的高度 变成和图片的高一样即可 
       4 图片标签
         mode属性 渲染模式
-          widthFix  让图片的标签宽高 和 图片标签的内容的宽高都等比例的发生变化 
-     -->
+          widthFix  让图片的标签宽高 和 图片标签的内容的宽高都等比例的发生变化  
+     -->  
      <!--autoplay indicator-dots circula: 分别表示轮播、有索引小点、循环过渡自然 -->
     <swiper autoplay indicator-dots circular>
       <swiper-item wx:for="{{swiperList}}" wx:key="goods_id" >
@@ -32,7 +32,12 @@
 
   <!-- 分类导航 开始 -->
   <view class="index_cate">
-      <navigator wx:for="{{catesList}}" wx:key="name">
+      <navigator 
+        wx:for="{{catesList}}"
+        wx:key="name"
+        url="/pages/category/index"
+        open-type="switchTab"
+      >
           <image mode="widthFix" src="{{item.image_src}}"> </image>
       </navigator>
   </view> 
@@ -57,7 +62,8 @@
           wx:for-item="item2"
           wx:for-index="index2"
           wx:key="name"
-          url="{{item2.navigator_url}}"
+          url = "{{item2.navigator_url}}"
+          
         > 
         <!-- 第一张图片高度自适应widthFix，其它图片高度拉伸到图片标签的高度 -->
         <image mode="{{index2===0?'widthFix':'scaleToFill'}}" src="{{item2.image_src}}" />

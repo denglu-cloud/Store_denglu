@@ -72,7 +72,9 @@ Page({
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
-          this.QueryParams.cid = options.cid;
+          // 不存在就为空字符串
+          this.QueryParams.cid = options.cid || "";
+          this.QueryParams.query = options.query || "";
           this.getGoodsList();
      },
 

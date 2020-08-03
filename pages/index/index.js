@@ -38,10 +38,16 @@ Page({
     url : "/home/swiperdata"})
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
+      // 获取回来的url是/pages/goods_detail/main?goods_id=129，要把main变成index
+      result.forEach(v => v.navigator_url = v.navigator_url.replace("main","index"));
       this.setData({ 
         // swiperList: result.data.message
         //result.data.message已经在request那边提取公共部分合并了
         swiperList: result
+
+        // swiperList: result.forEach(v => v.navigator_url = v.navigator_url.replace("main","index"))
+
+
       }) 
     })
  },
@@ -68,6 +74,13 @@ Page({
     url : "/home/floordata"})
     //以后嵌套调用，就在后面直接.then就行，就不会发生地狱回调了
     .then(result => {
+      // result.forEach(v => v.navigator_url = v.navigator_url.replace("main","index"));
+      for (let k = 0; k < result.length; k++) {
+        result[k].product_list.forEach((v, i) => {
+            result[k].product_list[i].navigator_url = v.navigator_url.replace('?', '/index?');
+        });
+      }
+
       this.setData({ 
         floorList: result
       }) 
