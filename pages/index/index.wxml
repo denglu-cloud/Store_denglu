@@ -26,7 +26,7 @@
           <image mode="widthFix" src="{{item.image_src}}"></image>
         </navigator>
       </swiper-item>
-    </swiper>
+    </swiper> 
   </view>
   <!-- 轮播图 结束 -->
 
@@ -40,7 +40,7 @@
 
 
 <!-- 楼层 开始 -->
-  <view class="index_floor">
+  <view class="index_floor">  
     <view class="floor_group"
       wx:for="{{floorList}}"
       wx:for-item="item1"
